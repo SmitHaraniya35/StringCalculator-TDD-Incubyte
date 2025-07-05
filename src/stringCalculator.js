@@ -1,4 +1,7 @@
+let callCount = 0;
 function add(input) {
+    callCount++;
+
     // Check if input is empty string
     if (input === "")
         return 0;
@@ -36,9 +39,21 @@ function add(input) {
 
 }
 
+function getCalledCount() {
+  return callCount;
+}
+
+function resetCalledCount(){
+    callCount = 0;
+}
+
 // Helper Functions
 function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-module.exports = { add };
+module.exports = { 
+    add, 
+    getCalledCount,
+    resetCalledCount
+};
