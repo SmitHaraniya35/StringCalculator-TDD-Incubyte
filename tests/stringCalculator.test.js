@@ -39,6 +39,4 @@ describe("Test String Calculator", () => {
     test('It should support multiple custom delimiters with any length', () => {
         expect(add("//[***][%%]\n1***2%%3")).toBe(6);
     });
-
-
 })
