@@ -3,8 +3,8 @@ function add(input){
     if(input === "") 
         return 0;
 
-    // Convert string to int if input string is contain single number
-    return parseInt(input);
+    // Handling single number or multiple comma-separated number
+    return input.split(',').map(Number).reduce((sum, num) => sum + num, 0);
 
 }
 
