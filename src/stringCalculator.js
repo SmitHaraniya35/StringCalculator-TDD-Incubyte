@@ -1,59 +1,67 @@
 let callCount = 0;
+
 function add(input) {
     callCount++;
 
-    // Check if input is empty string
-    if (input === "")
-        return 0;
+    if (input === "") return 0;
 
-    // Assign default delimiters 
+    const { delimiter, numbers } = extractDelimiterAndNumbers(input);
+    const numArray = numbers.split(delimiter).map(Number);
+
+    validateNoNegatives(numArray);
+
+    return numArray
+        .filter(n => !isNaN(n) && n <= 1000)
+        .reduce((sum, n) => sum + n, 0);
+}
+
+function extractDelimiterAndNumbers(input) {
     let delimiter = /[\n,]/;
+    let numbers = input;
 
     if (input.startsWith("//")) {
-        const [delimiterPart, numbersPart] = input.split('\n');
-        input = numbersPart;
+        const [delimiterPart, numberPart] = input.split("\n");
+        numbers = numberPart;
 
-        if (delimiterPart.startsWith('//[') && delimiterPart.endsWith(']')) {
+        if (delimiterPart.includes("[")) {
+            // Multiple or multi-length delimiters
             const delimiterMatches = [...delimiterPart.matchAll(/\[([^\]]+)\]/g)];
-            const delimiters = delimiterMatches
+            const pattern = delimiterMatches
                 .map(match => escapeRegExp(match[1]))
-                .join('|');
-            delimiter = new RegExp(delimiters, 'g');
+                .join("|");
+            delimiter = new RegExp(pattern, "g");
         } else {
-            // Single-character delimiter
-            const customDelimiter = delimiterPart.slice(2);
-            delimiter = new RegExp(escapeRegExp(customDelimiter));
+            // Single delimiter
+            const custom = delimiterPart.slice(2);
+            delimiter = new RegExp(escapeRegExp(custom));
         }
     }
 
-    const numArray = input.split(delimiter).map(Number);
-    const negatives = numArray.filter(n => n < 0);
+    return { delimiter, numbers };
+}
+
+function validateNoNegatives(numbers) {
+    const negatives = numbers.filter(n => n < 0);
     if (negatives.length > 0) {
         throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
     }
-
-
-    return numArray
-        .filter(n => n <= 1000)
-        .reduce((a, b) => a + b, 0);
-
 }
 
 function getCalledCount() {
-  return callCount;
+    return callCount;
 }
 
-function resetCalledCount(){
+function resetCalledCount() {
     callCount = 0;
 }
 
-// Helper Functions
+// Helper
 function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-module.exports = { 
-    add, 
+module.exports = {
+    add,
     getCalledCount,
     resetCalledCount
 };
