@@ -1,0 +1,14 @@
+{
+  "name": "stringcalculator-tdd-incubyte",
+  "version": "1.0.0",
+  "description": "A TDD-based String Calculator implementation using JavaScript and Jest, crafted with clean code principles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Haraniya Smit",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.4"
+  }
+}
