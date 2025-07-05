@@ -1,4 +1,4 @@
-const { add } = require("../src/stringCalculator")
+const { add, getCalledCount, resetCalledCount } = require("../src/stringCalculator")
 
 test("Jest is working perfactly!!", () => {
     expect(1).toBe(1);
@@ -47,6 +47,13 @@ describe("Test String Calculator", () => {
 
     test('It should ignore numbers greater than 1000', () => {
         expect(add("2,1001")).toBe(2);
+    });
+
+    test('track how many times add was called', () => {
+        resetCalledCount();
+        add("1,2");
+        add("2,3");
+        expect(getCalledCount()).toBe(2);
     });
 
 })
