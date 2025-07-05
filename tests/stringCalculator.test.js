@@ -22,4 +22,8 @@ describe("Test String Calculator", () => {
     test('It should support newline as delimiter and return sum of numbers separated by newline', () => {
         expect(add("1\n2,3")).toBe(6);
     });
+
+    test('It should support custom single-character delimiter', () => {
+        expect(add("//;\n1;2")).toBe(3);
+    });
 })
