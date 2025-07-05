@@ -5,6 +5,7 @@ function add(input){
 
     // Convert string to int if input string is contain single number
     return parseInt(input);
+
 }
 
 module.exports = { add };

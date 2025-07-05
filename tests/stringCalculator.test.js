@@ -12,4 +12,10 @@ describe("Test String Calculator", () => {
     test('It should return the number itself for single number', () => {
         expect(add("1")).toBe(1);
     });
+
+    test('It should return sum of multiple comma-separated numbers', () => {
+        expect(add("1,2")).toBe(3);
+        expect(add("1,2,3")).toBe(6);
+        expect(add("1,2,3,4")).toBe(10);
+    });
 })
