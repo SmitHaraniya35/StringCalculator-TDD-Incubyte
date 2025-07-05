@@ -11,9 +11,11 @@ function add(input) {
         input = numbersPart;
 
         if (delimiterPart.startsWith('//[') && delimiterPart.endsWith(']')) {
-            // Extract custom delimiter with any length, e.g., [***]
-            const customDelimiter = delimiterPart.slice(3, -1); // remove '//[' and ']'
-            delimiter = new RegExp(escapeRegExp(customDelimiter), 'g');
+            const delimiterMatches = [...delimiterPart.matchAll(/\[([^\]]+)\]/g)];
+            const delimiters = delimiterMatches
+                .map(match => escapeRegExp(match[1]))
+                .join('|');
+            delimiter = new RegExp(delimiters, 'g');
         } else {
             // Single-character delimiter
             const customDelimiter = delimiterPart.slice(2);
