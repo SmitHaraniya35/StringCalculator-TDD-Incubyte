@@ -30,7 +30,9 @@ function add(input) {
     }
 
 
-    return input.split(delimiter).map(Number).reduce((a, b) => a + b, 0);
+    return numArray
+        .filter(n => n <= 1000)
+        .reduce((a, b) => a + b, 0);
 
 }
 
