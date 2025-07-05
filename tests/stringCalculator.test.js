@@ -39,4 +39,10 @@ describe("Test String Calculator", () => {
     test('It should support multiple custom delimiters with any length', () => {
         expect(add("//[***][%%]\n1***2%%3")).toBe(6);
     });
+
+    test('It should throw error for single or more negative numbers', () => {
+        expect(() => add("1,-2,3")).toThrow("negative numbers not allowed -2");
+        expect(() => add("1,-2,-3")).toThrow("negative numbers not allowed -2,-3");
+    });
+
 })
