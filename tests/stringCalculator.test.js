@@ -18,4 +18,8 @@ describe("Test String Calculator", () => {
         expect(add("1,2,3")).toBe(6);
         expect(add("1,2,3,4")).toBe(10);
     });
+
+    test('It should support newline as delimiter and return sum of numbers separated by newline', () => {
+        expect(add("1\n2,3")).toBe(6);
+    });
 })
