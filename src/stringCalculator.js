@@ -3,8 +3,9 @@ function add(input){
     if(input === "") 
         return 0;
 
-    // Handling single number or multiple comma-separated numbers
-    return input.split(',').map(Number).reduce((sum, num) => sum + num, 0);
+    // Handling default delimiters and split input on it
+    const defaultDelimiters = /[\n,]/;
+    return input.split(defaultDelimiters).map(Number).reduce((a, b) => a + b, 0);
 
 }
 
